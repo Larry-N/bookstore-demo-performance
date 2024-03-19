@@ -24,7 +24,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.QueryBuilder;
 
-import one.microstream.exceptions.IORuntimeException;
+import org.eclipse.serializer.exceptions.IORuntimeException;
 
 /**
  * Lucene based full text search index for Java objects.

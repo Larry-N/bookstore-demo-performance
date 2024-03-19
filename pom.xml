@@ -34,7 +34,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<rap.version>11.00.00-RAP-GA</rap.version>
-		<microstream.version>08.00.00-MS-GA</microstream.version>
+		<eclipse.store.version>1.2.0</eclipse.store.version>
 		<lucene.version>9.5.0</lucene.version>
 		<vaadin.version>23.3.12</vaadin.version>
 	</properties>
@@ -60,19 +60,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>one.microstream</groupId>
-			<artifactId>microstream-storage-embedded</artifactId>
-			<version>${microstream.version}</version>
+			<groupId>org.eclipse.store</groupId>
+			<artifactId>storage-embedded</artifactId>
+			<version>${eclipse.store.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>one.microstream</groupId>
-			<artifactId>microstream-storage-embedded-configuration</artifactId>
-			<version>${microstream.version}</version>
+			<groupId>org.eclipse.store</groupId>
+			<artifactId>storage-embedded-configuration</artifactId>
+			<version>${eclipse.store.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>one.microstream</groupId>
-			<artifactId>microstream-persistence-binary-jdk8</artifactId>
-			<version>${microstream.version}</version>
+			<groupId>org.eclipse.serializer</groupId>
+			<artifactId>persistence-binary-jdk8</artifactId>
+			<version>${eclipse.store.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.javamoney.moneta</groupId>

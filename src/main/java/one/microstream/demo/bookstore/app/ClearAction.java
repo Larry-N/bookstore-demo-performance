@@ -5,8 +5,8 @@ import org.hibernate.Cache;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import one.microstream.reference.LazyReferenceManager;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
+import org.eclipse.serializer.reference.LazyReferenceManager;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 
 import java.util.concurrent.Callable;
 

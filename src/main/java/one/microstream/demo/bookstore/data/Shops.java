@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import one.microstream.demo.bookstore.BookStoreDemo;
 import one.microstream.demo.bookstore.util.concurrent.ReadWriteLocked;
-import one.microstream.persistence.types.Persister;
-import one.microstream.reference.Lazy;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
+import org.eclipse.serializer.persistence.types.Persister;
+import org.eclipse.serializer.reference.Lazy;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 
 /**
  * All retail shops operated by this company.

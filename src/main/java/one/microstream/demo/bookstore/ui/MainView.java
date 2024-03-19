@@ -91,7 +91,7 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-import one.microstream.configuration.types.ByteUnit;
+import org.eclipse.serializer.configuration.types.ByteUnit;
 import one.microstream.demo.bookstore.BookStoreDemo;
 import one.microstream.demo.bookstore.app.Action;
 import one.microstream.demo.bookstore.app.ActionExecutor;

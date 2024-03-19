@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import one.microstream.reference.Lazy;
+import org.eclipse.serializer.reference.Lazy;
 
 /**
  * Shop entity which holds a name, {@link Address}, {@link Employee}s and an {@link Inventory}.

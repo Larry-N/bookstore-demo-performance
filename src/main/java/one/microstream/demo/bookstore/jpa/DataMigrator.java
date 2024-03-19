@@ -30,7 +30,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
 import com.google.common.collect.Range;
 
-import one.microstream.configuration.types.ByteUnit;
+import org.eclipse.serializer.configuration.types.ByteUnit;
 import one.microstream.demo.bookstore.BookStoreDemo;
 import one.microstream.demo.bookstore.data.Address;
 import one.microstream.demo.bookstore.data.Author;
