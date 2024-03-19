@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 /**
  * Customer entity which holds a customer id, name and an {@link Address}.
  * <p>
@@ -34,6 +36,7 @@ public class Customer extends NamedWithAddress
 	 *
 	 * @return the customer id
 	 */
+	@JsonGetter
 	public int customerId()
 	{
 		return this.customerId;

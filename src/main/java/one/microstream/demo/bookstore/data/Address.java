@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -34,6 +36,7 @@ public class Address
 	 *
 	 * @return first address line
 	 */
+	@JsonGetter
 	public String address()
 	{
 		return this.address;
@@ -44,6 +47,7 @@ public class Address
 	 *
 	 * @return second address line
 	 */
+	@JsonGetter
 	public String address2()
 	{
 		return this.address2;
@@ -54,6 +58,7 @@ public class Address
 	 *
 	 * @return zip code
 	 */
+	@JsonGetter
 	public String zipCode()
 	{
 		return this.zipCode;
@@ -64,6 +69,7 @@ public class Address
 	 *
 	 * @return city
 	 */
+	@JsonGetter
 	public City city()
 	{
 		return this.city;

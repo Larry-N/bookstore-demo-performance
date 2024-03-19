@@ -3,17 +3,15 @@ package one.microstream.demo.bookstore.ui;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 
 import javax.money.MonetaryAmount;
 
+import one.microstream.demo.bookstore.Converter;
+import one.microstream.demo.bookstore.data.*;
+import one.microstream.demo.bookstore.jpa.domain.*;
 import org.springframework.data.domain.PageRequest;
 
 import com.google.common.collect.Range;
@@ -21,12 +19,7 @@ import com.google.common.collect.Range;
 import one.microstream.demo.bookstore.BookStoreDemo;
 import one.microstream.demo.bookstore.app.ActionExecutor;
 import one.microstream.demo.bookstore.app.QueryAction;
-import one.microstream.demo.bookstore.data.Country;
-import one.microstream.demo.bookstore.data.Data;
-import one.microstream.demo.bookstore.data.Shop;
 import one.microstream.demo.bookstore.jpa.dal.Repositories;
-import one.microstream.demo.bookstore.jpa.domain.CountryEntity;
-import one.microstream.demo.bookstore.jpa.domain.ShopEntity;
 
 
 class Query
@@ -65,6 +58,7 @@ class Query
 								customers.skip(page * pageSize).limit(pageSize).collect(toList())
 							),
 							() -> repositories.customerRepository().findAll(PageRequest.of(page, pageSize))
+									.stream().map(Converter::fromEntity).collect(toList())
 						))
 					)
 				);
@@ -100,7 +94,7 @@ class Query
 							() -> repositories.bookRepository()
 								.findByRetailPriceGreaterThanEqualAndRetailPriceLessThan(
 									minPriceMoney, maxPriceMoney
-								)
+								).stream().map(Converter::fromEntity).collect(toList())
 						));
 					})
 				);
@@ -124,6 +118,7 @@ class Query
 								"Bestseller of " + year + " in " + country.name() + " [" + iteration + "]",
 								() -> data.purchases().bestSellerList(year, country),
 								() -> repositories.purchaseItemRepository().bestSellerList(year, countryEntity)
+										.stream().map(Converter::fromEntity).collect(toList())
 							))
 						)
 					)
@@ -147,7 +142,7 @@ class Query
 							executor.submit(QueryAction.New(
 								"Employee of " + year + " in " + country.name() + " [" + iteration + "]",
 								() -> data.purchases().employeeOfTheYear(year, country),
-								() -> repositories.employeeRepository().employeeOfTheYear(year, countryEntity.getId())
+								() -> Converter.fromEntity(repositories.employeeRepository().employeeOfTheYear(year, countryEntity.getId()))
 							))
 						)
 					)
@@ -172,6 +167,7 @@ class Query
 								"Purchases of foreigners " + year + " in " + country.name() + " [" + iteration + "]",
 								() -> data.purchases().purchasesOfForeigners(year, country),
 								() -> repositories.purchaseRepository().findPurchasesOfForeigners(year, countryEntity)
+										.stream().map(Converter::fromEntity).collect(toList())
 							))
 						)
 					)
@@ -199,6 +195,7 @@ class Query
 									.collect(toList()),
 								() -> repositories.bookRepository()
 									.findByTitleContainingIgnoreCaseAndAuthorAddressCityStateCountry(pattern, countryEntity)
+										.stream().map(Converter::fromEntity).collect(toList())
 							))
 						)
 					)

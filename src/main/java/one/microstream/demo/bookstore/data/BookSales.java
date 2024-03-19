@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 /**
  * View of a book's sale numbers, with {@link Comparable} capabilities.
  * <p>
@@ -34,6 +36,7 @@ public class BookSales implements Comparable<BookSales>
 	 *
 	 * @return the book
 	 */
+	@JsonGetter
 	public Book book()
 	{
 		return this.book;
@@ -44,6 +47,7 @@ public class BookSales implements Comparable<BookSales>
 	 *
 	 * @return the amount
 	 */
+	@JsonGetter
 	public int amount()
 	{
 		return this.amount;

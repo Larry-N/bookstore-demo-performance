@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 /**
  * Feature type for all named entities, with {@link Comparable} capabilities.
  *
@@ -21,6 +23,7 @@ public abstract class Named implements Comparable<Named>
 	 *
 	 * @return the name
 	 */
+	@JsonGetter
 	public String name()
 	{
 		return this.name;

@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import one.microstream.reference.LazyReferenceManager;
 import one.microstream.storage.embedded.types.EmbeddedStorageManager;
 
+import java.util.concurrent.Callable;
+
 
 public interface ClearAction extends Action
 {
@@ -18,7 +20,10 @@ public interface ClearAction extends Action
 	
 	public static ClearAction GarbageCollector()
 	{
-		return new Default("Garbage Collector", "Execute", System::gc);
+		return new Default("Garbage Collector", "Execute", () -> {
+			System.gc();
+			return null;
+		});
 	}
 	
 	public static ClearAction LazyRefsAndObjectCache(
@@ -33,6 +38,7 @@ public interface ClearAction extends Action
 //				.persistenceManager()
 //				.objectRegistry()
 //				.clear();
+			return null;
 		});
 	}
 	
@@ -43,6 +49,7 @@ public interface ClearAction extends Action
 		return new Default("Storage Cache", "Clear", () ->
 		{
 			storageManager.issueCacheCheck(Long.MAX_VALUE, (s, t, e) -> true);
+			return null;
 		});
 	}
 	
@@ -57,6 +64,7 @@ public interface ClearAction extends Action
 			{
 				session.clear();
 			}
+			return null;
 		});
 	}
 	
@@ -71,13 +79,14 @@ public interface ClearAction extends Action
 			{
 				cache.evictAllRegions();
 			}
+			return null;
 		});
 	}
 	
 	public static ClearAction New(
 		final String title,
 		final String verb,
-		final Runnable logic
+		final Callable<?> logic
 	)
 	{
 		return new Default(title, verb, logic);
@@ -87,12 +96,12 @@ public interface ClearAction extends Action
 	{
 		private final String   title;
 		private final String   verb;
-		private final Runnable logic;
+		private final Callable<?> logic;
 		
 		Default(
 			final String title,
 			final String verb,
-			final Runnable logic
+			final Callable<?> logic
 		)
 		{
 			super();
@@ -120,7 +129,7 @@ public interface ClearAction extends Action
 		}
 		
 		@Override
-		public Runnable logic()
+		public Callable<?> logic()
 		{
 			return this.logic;
 		}

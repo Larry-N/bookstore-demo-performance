@@ -1,30 +1,32 @@
 
 package one.microstream.demo.bookstore.app;
 
+import java.util.concurrent.Callable;
+
 public interface QueryAction extends Action
 {
 	public QueryStats queryStats();
 	
 	public static QueryAction New(
 		final String description,
-		final Runnable msQuery,
-		final Runnable jpaQuery
+		final Callable<?> msQuery,
+		final Callable<?> jpaQuery
 	)
 	{
 		return new Default(description, msQuery, jpaQuery);
 	}
 	
-	public static class Default implements QueryAction, Runnable
+	public static class Default implements QueryAction, Callable<Object>
 	{
 		private final String   description;
-		private final Runnable msQuery;
-		private final Runnable jpaQuery;
+		private final Callable<?> msQuery;
+		private final Callable<?> jpaQuery;
 		private QueryStats     queryStats;
 		
 		Default(
 			final String description,
-			final Runnable msQuery,
-			final Runnable jpaQuery
+			final Callable<?> msQuery,
+			final Callable<?> jpaQuery
 		)
 		{
 			super();
@@ -40,25 +42,25 @@ public interface QueryAction extends Action
 		}
 		
 		@Override
-		public Runnable logic()
+		public Callable<?> logic()
 		{
 			return this;
 		}
 		
 		@Override
-		public void run()
+		public Object call() throws Exception
 		{
-			final Stopwatch stopwatch = Stopwatch.StartNanotime();
+//			final Stopwatch stopwatch = Stopwatch.StartNanotime();
 			
-			this.msQuery.run();
+//			this.msQuery.run();
+//
+//			final long msNanos = stopwatch.restart();
 			
-			final long msNanos = stopwatch.restart();
+			return this.jpaQuery.call();
 			
-			this.jpaQuery.run();
+//			final long jpaNanos = stopwatch.stop();
 			
-			final long jpaNanos = stopwatch.stop();
-			
-			this.queryStats = QueryStats.New(this.description, msNanos, jpaNanos);
+//			this.queryStats = QueryStats.New(this.description, msNanos, jpaNanos);
 		}
 		
 		@Override

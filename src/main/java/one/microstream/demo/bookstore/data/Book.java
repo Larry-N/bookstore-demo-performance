@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.money.MonetaryAmount;
 
 /**
@@ -59,6 +61,7 @@ public class Book extends Named
 	 *
 	 * @return the ISBN-13
 	 */
+	@JsonGetter
 	public String isbn13()
 	{
 		return this.isbn13;
@@ -69,6 +72,7 @@ public class Book extends Named
 	 *
 	 * @return the title
 	 */
+	@JsonGetter
 	public String title()
 	{
 		return this.name();
@@ -79,6 +83,7 @@ public class Book extends Named
 	 *
 	 * @return the author
 	 */
+	@JsonGetter
 	public Author author()
 	{
 		return this.author;
@@ -89,6 +94,7 @@ public class Book extends Named
 	 *
 	 * @return the genre
 	 */
+	@JsonGetter
 	public Genre genre()
 	{
 		return this.genre;
@@ -99,6 +105,7 @@ public class Book extends Named
 	 *
 	 * @return the publisher
 	 */
+	@JsonGetter
 	public Publisher publisher()
 	{
 		return this.publisher;
@@ -109,6 +116,7 @@ public class Book extends Named
 	 *
 	 * @return the language
 	 */
+	@JsonGetter
 	public Language language()
 	{
 		return this.language;
@@ -119,6 +127,7 @@ public class Book extends Named
 	 *
 	 * @return the purchase price
 	 */
+	@JsonGetter
 	public MonetaryAmount purchasePrice()
 	{
 		return this.purchasePrice;
@@ -129,6 +138,7 @@ public class Book extends Named
 	 *
 	 * @return the retail price
 	 */
+	@JsonGetter
 	public MonetaryAmount retailPrice()
 	{
 		return this.retailPrice;

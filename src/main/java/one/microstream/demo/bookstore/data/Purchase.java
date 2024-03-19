@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,7 @@ public class Purchase
 	 *
 	 * @return the shop
 	 */
+	@JsonGetter
 	public Shop shop()
 	{
 		return this.shop;
@@ -64,6 +67,7 @@ public class Purchase
 	 *
 	 * @return the employee
 	 */
+	@JsonGetter
 	public Employee employee()
 	{
 		return this.employee;
@@ -74,6 +78,7 @@ public class Purchase
 	 *
 	 * @return the customer
 	 */
+	@JsonGetter
 	public Customer customer()
 	{
 		return this.customer;
@@ -84,6 +89,7 @@ public class Purchase
 	 *
 	 * @return the timestamp
 	 */
+	@JsonGetter
 	public LocalDateTime timestamp()
 	{
 		return this.timestamp;
@@ -94,6 +100,7 @@ public class Purchase
 	 *
 	 * @return a {@link Stream} of {@link PurchaseItem}s
 	 */
+	@JsonGetter
 	public Stream<PurchaseItem> items()
 	{
 		return this.items.stream();

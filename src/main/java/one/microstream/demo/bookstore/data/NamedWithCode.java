@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 /**
  * Feature type for all named entities with a code.
  *
@@ -24,6 +26,7 @@ public abstract class NamedWithCode extends Named
 	 *
 	 * @return the code
 	 */
+	@JsonGetter
 	public String code()
 	{
 		return this.code;

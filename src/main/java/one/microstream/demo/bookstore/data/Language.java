@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.util.Locale;
 
 
@@ -31,6 +33,7 @@ public class Language extends Named
 	 *
 	 * @return the locale
 	 */
+	@JsonGetter
 	public Locale locale()
 	{
 		return this.locale;

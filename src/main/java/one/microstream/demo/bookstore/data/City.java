@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -34,6 +36,7 @@ public class City extends Named
 	 *
 	 * @return the state
 	 */
+	@JsonGetter
 	public State state()
 	{
 		return this.state;

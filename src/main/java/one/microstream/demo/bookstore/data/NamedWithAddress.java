@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.util.Objects;
 
 /**
@@ -26,6 +28,7 @@ public abstract class NamedWithAddress extends Named
 	 *
 	 * @return the address
 	 */
+	@JsonGetter
 	public Address address()
 	{
 		return this.address;

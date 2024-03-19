@@ -1,6 +1,8 @@
 
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.util.Objects;
 
 /**
@@ -34,6 +36,7 @@ public class State extends Named
 	 *
 	 * @return the country
 	 */
+	@JsonGetter
 	public Country country()
 	{
 		return this.country;

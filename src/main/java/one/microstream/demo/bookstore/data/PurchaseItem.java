@@ -1,5 +1,7 @@
 package one.microstream.demo.bookstore.data;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.money.MonetaryAmount;
 
 /**
@@ -33,6 +35,7 @@ public class PurchaseItem
 	 *
 	 * @return the book
 	 */
+	@JsonGetter
 	public Book book()
 	{
 		return this.book;
@@ -43,6 +46,7 @@ public class PurchaseItem
 	 *
 	 * @return the amount
 	 */
+	@JsonGetter
 	public int amount()
 	{
 		return this.amount;
@@ -53,6 +57,7 @@ public class PurchaseItem
 	 *
 	 * @return the price at the time the book was sold
 	 */
+	@JsonGetter
 	public MonetaryAmount price()
 	{
 		return this.price;

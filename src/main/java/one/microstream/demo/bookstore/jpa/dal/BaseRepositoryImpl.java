@@ -96,7 +96,7 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 //		this.jdbcTemplate.batchUpdate(this.insertSql(), statementSetter);
 
 		final List<String> sqls = new ArrayList<>(BATCH_SIZE);
-
+		FakePreparedStatement fake = new FakePreparedStatement(this.insertSql());
 		this.jdbcTemplate.execute(this.insertSql(), (PreparedStatementCallback<Object>)ps ->
 		{
 			try
@@ -106,14 +106,16 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 					? (InterruptibleBatchPreparedStatementSetter)pss : null;
 				for(int i = 0, c = pss.getBatchSize(); i < c; i++)
 				{
-					pss.setValues(ps, i);
+
+					pss.setValues(fake, i);
 
 					if(ipss != null && ipss.isBatchExhausted(i))
 					{
 						break;
 					}
 
-					sqls.add(unwrap(ps).toString());
+//					sqls.add(unwrap(ps).toString());
+					sqls.add(fake.toString());
 
 					if(sqls.size() == BATCH_SIZE)
 					{
@@ -140,10 +142,12 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 	private void executeAndClear(final List<String> sqls)
 	{
 		this.logger().info("Executing " + sqls.size() + " inserts...");
-
-		final String sql = sqls.stream().collect(Collectors.joining(";\n", "", ";"));
-		sqls.clear();
-		this.jdbcTemplate.execute(sql);
+		for (String sql: sqls) {
+			jdbcTemplate.execute(sql);
+		}
+//		final String sql = sqls.stream().collect(Collectors.joining(";\n", "", ";"));
+//		sqls.clear();
+//		this.jdbcTemplate.execute(sql);
 	}
 
 	private static PreparedStatement unwrap(PreparedStatement statement) throws SQLException

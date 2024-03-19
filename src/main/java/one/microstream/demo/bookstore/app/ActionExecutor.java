@@ -280,8 +280,13 @@ public interface ActionExecutor
 		)
 		{
 			this.callback.beforeExecution(action);
-			action.logic().run();
-			this.callback.afterExecution(action);
+			try {
+				action.logic().call();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			} finally {
+				this.callback.afterExecution(action);
+			}
 		}
 		
 	}
