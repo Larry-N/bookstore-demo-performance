@@ -116,9 +116,11 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 
 //					sqls.add(unwrap(ps).toString());
 					sqls.add(fake.toString());
+					//this.logger().warning("@niv " + fake.toString());
 
 					if(sqls.size() == BATCH_SIZE)
 					{
+					//	this.logger().warning("@niv piu piu ");
 						this.executeAndClear(sqls);
 					}
 				}
@@ -134,7 +136,8 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 		});
 
 		if(sqls.size() > 0)
-		{
+		{	
+			//this.logger().warning("@niv piu piu 2");
 			this.executeAndClear(sqls);
 		}
 	}
@@ -143,10 +146,15 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepositoryCustom<T>, 
 	{
 		this.logger().info("Executing " + sqls.size() + " inserts...");
 		for (String sql: sqls) {
-			jdbcTemplate.execute(sql);
+			try {
+				jdbcTemplate.execute(sql);
+			} catch (Throwable e) {
+				//this.logger().warning("Exception in execution " + sql);
+				//System.exit(99);
+			}
 		}
 //		final String sql = sqls.stream().collect(Collectors.joining(";\n", "", ";"));
-//		sqls.clear();
+		sqls.clear();
 //		this.jdbcTemplate.execute(sql);
 	}
 
